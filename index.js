@@ -10,13 +10,13 @@ const {
     tootleSonum 
 } = require("./controller");
 
-const { tagastaSonumid } = require('./api_controller');
+const { tagastaSonumid, lisaSonum } = require('./api_controller');
 
 const app = express();
 app.use(express.static("public"))
 const PORT = process.env.PORT || 3030
 
-//app.use(express.json())
+app.use(express.json())
 app.use(express.urlencoded())
 
 app.set("views", path.join(__dirname, "views"));
@@ -37,6 +37,10 @@ app.post('/kontakt', tootleSonum)
 
 //API endpoindid
 app.get('/api/sonumid', tagastaSonumid)
+app.post('/api/sonumid', lisaSonum)
+
+//Admin
+app.get('/admin', (req, res)=>{res.render('pages/admin')})
 
 
 app.listen(PORT, () => console.log('Mataklubi töötab pordil ' + PORT))

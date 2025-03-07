@@ -1,0 +1,11 @@
+## Kõigi sõnumite lugemine
+GET http://localhost:3030/api/sonumid
+
+### Sõnumi saatmine
+POST http://localhost:3030/api/sonumid
+Content-Type: application/json
+
+{
+    "nimi": "Piplota",
+    "sonum": "veel üks sõnum"
+}
