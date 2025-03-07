@@ -24,6 +24,8 @@ const matkad = [
     }
 ]
 
+const sonumid = []
+
 function loeMatkadeAndmed() {
     return matkad
 }
@@ -46,8 +48,18 @@ function lisaOsaleja(matkaIndeks, osalejaEmail) {
 
 }
 
+function lisaSonum({nimi, sonum}) {
+    sonumid.push({nimi, sonum})
+}
+
+function loeSonumid() {
+    return sonumid
+}
+
 module.exports = {
     loeMatkadeAndmed,
-    lisaOsaleja
+    lisaOsaleja,
+    lisaSonum,
+    loeSonumid
 }
 

@@ -1,9 +1,13 @@
-const {loeMatkadeAndmed, lisaOsaleja} = require("../data")
+const {loeMatkadeAndmed, lisaOsaleja, lisaSonum, loeSonumid} = require("../data")
 
 const naitaMatkad = (req, res) => {
     const matkad = loeMatkadeAndmed()
     console.log(matkad)
     res.render("pages/index", {matkad: matkad})
+}
+
+const naitaKontakt = (req, res) => {
+    res.render("pages/kontakt")
 }
 
 const registreeriOsaleja = (req, res) => {
@@ -27,10 +31,22 @@ const naitaMatka = (req, res) => {
             </body>
         </html>
         `)
+    // res.render('pages/matk', {matk: matk})    
+}
+
+const tootleSonum = (req, res) => {
+    console.log(req.body)
+    lisaSonum({nimi: req.body.nimi, sonum: req.body.markus})
+    console.log(loeSonumid())
+    res.send(`
+        <h2>Sõnum on edukalt edastatud</h2>
+    `)
 }
 
 module.exports = {
     naitaMatkad,
     registreeriOsaleja,
-    naitaMatka
+    naitaMatka,
+    naitaKontakt,
+    tootleSonum
 }
