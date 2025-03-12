@@ -1,3 +1,6 @@
+### Kõigi matkade andmete lugemine
+GET http://localhost:3030/api/matkad
+
 ## Kõigi sõnumite lugemine
 GET http://localhost:3030/api/sonumid
 

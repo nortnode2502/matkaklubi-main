@@ -10,7 +10,7 @@ const {
     tootleSonum 
 } = require("./controller");
 
-const { tagastaSonumid, lisaSonum } = require('./api_controller');
+const { tagastaSonumid, lisaSonum, tagastaMatkad } = require('./api_controller');
 
 const app = express();
 app.use(express.static("public"))
@@ -38,6 +38,7 @@ app.post('/kontakt', tootleSonum)
 //API endpoindid
 app.get('/api/sonumid', tagastaSonumid)
 app.post('/api/sonumid', lisaSonum)
+app.get('/api/matkad', tagastaMatkad)
 
 //Admin
 app.get('/admin', (req, res)=>{res.render('pages/admin')})
