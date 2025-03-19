@@ -1,7 +1,7 @@
 const {loeMatkadeAndmed, lisaOsaleja, lisaSonum, loeSonumid, lisaMatk} = require("../data")
 
-const naitaMatkad = (req, res) => {
-    const matkad = loeMatkadeAndmed()
+const naitaMatkad = async (req, res) => {
+    const matkad = await loeMatkadeAndmed()
     console.log(matkad)
     res.render("pages/index", {matkad: matkad})
 }
@@ -15,8 +15,8 @@ const registreeriOsaleja = (req, res) => {
     res.redirect("/matkad")
 }
 
-const naitaMatka = (req, res) => {
-    const matkad = loeMatkadeAndmed()
+const naitaMatka = async (req, res) => {
+    const matkad = await loeMatkadeAndmed()
     const matkaIndeks = req.params.id
     const matk = matkad[matkaIndeks]
     res.send(`

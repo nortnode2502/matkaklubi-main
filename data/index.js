@@ -1,7 +1,7 @@
 const { MongoClient } = require("mongodb")
 
 const andmebaas = "matka-app-2111"
-const salasona = "Test1234"
+const salasona = "Test1256"
 const mongoUrl = `mongodb+srv://matkaapp:${salasona}@cluster0.exen9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 const client = new MongoClient(mongoUrl);
 
@@ -33,8 +33,20 @@ const matkad = [
 
 const sonumid = []
 
-function loeMatkadeAndmed() {
-    return matkad
+async function loeMatkadeAndmed() {
+    try {
+        await client.connect();
+        const database = client.db(andmebaas);
+        const matkadCollection = database.collection("matkad");
+        const matkad = await matkadCollection.find({}).toArray()
+        return matkad
+      } catch(error) {
+        console.log(error.message)
+        return []
+      } finally {
+        await client.close();
+      }
+
 }
 
 function lisaOsaleja(matkaIndeks, osalejaEmail) {
@@ -64,7 +76,7 @@ async function lisaMatk(matk) {
         await client.connect();
         const database = client.db(andmebaas);
         const matkad = database.collection("matkad");
-        const result = await matkad.insertOne(uusMatk)
+        const result = await matkad.insertOne(matk)
         console.log(`A document was inserted with the _id: ${result.insertedId}`)
       } finally {
         await client.close();

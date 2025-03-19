@@ -1,4 +1,4 @@
-const { loeSonumid, lisaSonum : lisaSonumData, loeMatkadeAndmed } = require('../data')
+const { loeSonumid, lisaSonum : lisaSonumData, loeMatkadeAndmed, lisaMatk } = require('../data')
 
 const tagastaSonumid = (req, res) => {
     const sonumid = loeSonumid()
@@ -11,8 +11,8 @@ const lisaSonum = (req, res) => {
     res.status(201).end()
 }
 
-const tagastaMatkad = (req, res) => {
-    const matkad = loeMatkadeAndmed()
+const tagastaMatkad = async (req, res) => {
+    const matkad = await loeMatkadeAndmed()
     res.json(matkad)
 }
 

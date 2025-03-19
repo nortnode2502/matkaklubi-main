@@ -18,7 +18,7 @@ POST http://localhost:3030/api/matk
 Content-Type: application/json
 
 {
-    "nimetus": "Süstamatk ümber Hiiumaa",
+    "nimetus": "Paadimatk Soomaal",
     "kirjeldus": "palju sõudmist"
 }
 
