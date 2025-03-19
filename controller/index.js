@@ -10,8 +10,8 @@ const naitaKontakt = (req, res) => {
     res.render("pages/kontakt")
 }
 
-const registreeriOsaleja = (req, res) => {
-    lisaOsaleja(req.query.matk, req.query.email)
+const registreeriOsaleja = async (req, res) => {
+    await lisaOsaleja(req.query.matk, req.query.email)
     res.redirect("/matkad")
 }
 

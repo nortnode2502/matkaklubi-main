@@ -10,7 +10,14 @@ const {
     tootleSonum
 } = require("./controller");
 
-const { tagastaSonumid, lisaSonum, tagastaMatkad, looMatk } = require('./api_controller');
+const { 
+    tagastaSonumid, 
+    lisaSonum, 
+    tagastaMatkad, 
+    looMatk,
+    lisaOsalejaCtrl 
+} = require('./api_controller');
+const { loeMatkadeAndmed } = require('./data');
 
 const app = express();
 app.use(express.static("public"))
@@ -40,9 +47,13 @@ app.get('/api/sonumid', tagastaSonumid)
 app.post('/api/sonumid', lisaSonum)
 app.get('/api/matkad', tagastaMatkad)
 app.post('/api/matk', looMatk)
+app.patch('/api/matk/:id/osaleja', lisaOsalejaCtrl)
 
 //Admin
 app.get('/admin', (req, res)=>{res.render('pages/admin')})
 
 
-app.listen(PORT, () => console.log('Mataklubi töötab pordil ' + PORT))
+app.listen(PORT, () => {
+    console.log('Mataklubi töötab pordil ' + PORT)
+    loeMatkadeAndmed()
+})

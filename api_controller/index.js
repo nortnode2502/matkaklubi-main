@@ -1,4 +1,10 @@
-const { loeSonumid, lisaSonum : lisaSonumData, loeMatkadeAndmed, lisaMatk } = require('../data')
+const { 
+    loeSonumid, 
+    lisaSonum : lisaSonumData, 
+    loeMatkadeAndmed, 
+    lisaMatk,
+    lisaOsaleja
+} = require('../data')
 
 const tagastaSonumid = (req, res) => {
     const sonumid = loeSonumid()
@@ -34,10 +40,28 @@ async function looMatk(req, res) {
     res.status(201).end()
 }
 
+async function lisaOsalejaCtrl(req, res) {
+    if (!req.body.email) {
+        res.status(403).end({error: "email ei tohi olla tühi"})
+    }
+
+    if (!req.params.id) {
+        res.status(403).end({error: "matka id ei ole antud"})
+    }
+
+    const result = await lisaOsaleja(req.params.id, req.body.email)
+    if (result) {
+        res.status(201).end()
+    } else {
+        res.status(401).end({error: "osaleja lisamine ebaõnnestus"})
+    }
+}
+
 
 module.exports = {
     tagastaSonumid,
     lisaSonum,
     tagastaMatkad,
-    looMatk
+    looMatk,
+    lisaOsalejaCtrl
 }

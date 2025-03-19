@@ -20,25 +20,19 @@ const matk2 = {
     osalejad: ["mati@matkaja.ee", "kati@matkaja.ee", "uudo@ryhkija.ee"]
 }
 
-const matkad = [
-    matk1,
-    matk2,
-    {
-        nimetus: "Mägimatk Otepääl",
-        pildiUrl: "/assets/maed.png",
-        kirjeldus: "Lähme ja oleme kolm päeva mägedes",
-        osalejad: ["uudo@ryhkija.ee"]
-    }
-]
+let matkad = null
 
 const sonumid = []
 
 async function loeMatkadeAndmed() {
+    if (matkad !== null) {
+        return matkad
+    }
     try {
         await client.connect();
         const database = client.db(andmebaas);
         const matkadCollection = database.collection("matkad");
-        const matkad = await matkadCollection.find({}).toArray()
+        matkad = await matkadCollection.find({}).toArray()
         return matkad
       } catch(error) {
         console.log(error.message)
@@ -49,7 +43,7 @@ async function loeMatkadeAndmed() {
 
 }
 
-function lisaOsaleja(matkaIndeks, osalejaEmail) {
+async function lisaOsaleja(matkaIndeks, osalejaEmail) {
     const matk = matkad[matkaIndeks]
     if (!matk) {
         throw Error("Otsitavat matka ei ole")
@@ -65,6 +59,21 @@ function lisaOsaleja(matkaIndeks, osalejaEmail) {
 
     matk.osalejad.push(osalejaEmail)
 
+    try {
+        await client.connect();
+        const database = client.db(andmebaas);
+        const matkad = database.collection("matkad");
+        const result = await matkad.updateOne(
+            {_id: matk._id},
+            {
+               $set: {osalejad: matk.osalejad} 
+            }
+        )
+        return true
+      } finally {
+        await client.close();
+      }    
+
 }
 
 function lisaSonum({nimi, sonum}) {
@@ -72,6 +81,7 @@ function lisaSonum({nimi, sonum}) {
 }
 
 async function lisaMatk(matk) {
+    matkad.push(matk)
     try {
         await client.connect();
         const database = client.db(andmebaas);
