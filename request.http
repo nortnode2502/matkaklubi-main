@@ -12,3 +12,23 @@ Content-Type: application/json
     "nimi": "Piplota",
     "sonum": "veel üks sõnum"
 }
+
+### Matka loomine
+POST http://localhost:3030/api/matk
+Content-Type: application/json
+
+{
+    "nimetus": "Süstamatk ümber Hiiumaa",
+    "kirjeldus": "palju sõudmist"
+}
+
+
+### 
+POST http://localhost:3030/api/todo
+Content-Type: application/json
+
+{
+  "nimetus": "prae muna",
+  "prioriteet": 1, 
+  "kasTehtud": true,
+}

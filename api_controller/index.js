@@ -16,8 +16,28 @@ const tagastaMatkad = (req, res) => {
     res.json(matkad)
 }
 
+async function looMatk(req, res) {
+    if (!req.body.nimetus) {
+        res.status(403).end({error: "nimetus ei tohi olla tühi"})
+        return;
+    }
+
+
+    const matk = {
+        nimetus: req.body.nimetus,
+        pildiUrl: "/assets/Hills.png",
+        kirjeldus: req.body.kirjeldus,
+        osalejad: []
+    }
+
+    await lisaMatk(matk)
+    res.status(201).end()
+}
+
+
 module.exports = {
     tagastaSonumid,
     lisaSonum,
-    tagastaMatkad
+    tagastaMatkad,
+    looMatk
 }

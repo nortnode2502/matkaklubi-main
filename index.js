@@ -7,10 +7,10 @@ const {
     naitaMatka, 
     registreeriOsaleja, 
     naitaKontakt,
-    tootleSonum 
+    tootleSonum
 } = require("./controller");
 
-const { tagastaSonumid, lisaSonum, tagastaMatkad } = require('./api_controller');
+const { tagastaSonumid, lisaSonum, tagastaMatkad, looMatk } = require('./api_controller');
 
 const app = express();
 app.use(express.static("public"))
@@ -39,6 +39,7 @@ app.post('/kontakt', tootleSonum)
 app.get('/api/sonumid', tagastaSonumid)
 app.post('/api/sonumid', lisaSonum)
 app.get('/api/matkad', tagastaMatkad)
+app.post('/api/matk', looMatk)
 
 //Admin
 app.get('/admin', (req, res)=>{res.render('pages/admin')})

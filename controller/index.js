@@ -1,4 +1,4 @@
-const {loeMatkadeAndmed, lisaOsaleja, lisaSonum, loeSonumid} = require("../data")
+const {loeMatkadeAndmed, lisaOsaleja, lisaSonum, loeSonumid, lisaMatk} = require("../data")
 
 const naitaMatkad = (req, res) => {
     const matkad = loeMatkadeAndmed()
@@ -48,5 +48,5 @@ module.exports = {
     registreeriOsaleja,
     naitaMatka,
     naitaKontakt,
-    tootleSonum
+    tootleSonum,
 }
