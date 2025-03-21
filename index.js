@@ -15,7 +15,8 @@ const {
     lisaSonum, 
     tagastaMatkad, 
     looMatk,
-    lisaOsalejaCtrl 
+    lisaOsalejaCtrl,
+    kustutaOsalejaCtrl 
 } = require('./api_controller');
 const { loeMatkadeAndmed } = require('./data');
 
@@ -47,7 +48,8 @@ app.get('/api/sonumid', tagastaSonumid)
 app.post('/api/sonumid', lisaSonum)
 app.get('/api/matkad', tagastaMatkad)
 app.post('/api/matk', looMatk)
-app.patch('/api/matk/:id/osaleja', lisaOsalejaCtrl)
+app.post('/api/matk/:id/osaleja', lisaOsalejaCtrl)
+app.delete('/api/matk/:id/osaleja/:osalejaId', kustutaOsalejaCtrl)
 
 //Admin
 app.get('/admin', (req, res)=>{res.render('pages/admin')})

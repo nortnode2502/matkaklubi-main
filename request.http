@@ -34,13 +34,13 @@ Content-Type: application/json
 }
 
 ### Osaleja lisamine matkale
-PATCH http://localhost:3030/api/matk/0/osaleja
+POST http://localhost:3030/api/matk/0/osaleja
 Content-Type: application/json
 
 {
-    "email": "uus.matkaja2@test.ee"
+    "email": "uus.matkaja4@test.ee"
 }
 
 ### Osaleja eemaldamine matkalt
-DELETE http://localhost:3030/api/matk/1/osaleja/2
+DELETE http://localhost:3030/api/matk/4343434/osaleja/0
 

@@ -3,7 +3,8 @@ const {
     lisaSonum : lisaSonumData, 
     loeMatkadeAndmed, 
     lisaMatk,
-    lisaOsaleja
+    lisaOsaleja,
+    eemaldaOsaleja
 } = require('../data')
 
 const tagastaSonumid = (req, res) => {
@@ -57,11 +58,29 @@ async function lisaOsalejaCtrl(req, res) {
     }
 }
 
+async function kustutaOsalejaCtrl(req, res) {
+    if (!req.params.id) {
+        res.status(403).end({error: "matka id ei ole antud"})
+    }
+    
+    if (!req.params.osalejaId) {
+        res.status(403).end({error: "osaleja id ei ole antud"})
+    }
+
+    const result = await eemaldaOsaleja(req.params.id, req.params.osalejaId)
+    if (result) {
+        res.status(200).end()
+    } else {
+        res.status(401).end({error: "osaleja lisamine ebaõnnestus"})
+    }
+}
+
 
 module.exports = {
     tagastaSonumid,
     lisaSonum,
     tagastaMatkad,
     looMatk,
-    lisaOsalejaCtrl
+    lisaOsalejaCtrl,
+    kustutaOsalejaCtrl
 }
