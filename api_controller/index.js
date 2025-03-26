@@ -19,8 +19,15 @@ const lisaSonum = (req, res) => {
 }
 
 const tagastaMatkad = async (req, res) => {
-    const matkad = await loeMatkadeAndmed()
-    res.json(matkad)
+    try {
+        const matkad = await loeMatkadeAndmed()
+        res.json(matkad)
+    } catch (error) {
+        res.status(406).end({
+            error: "Matkade andmete lugemine ebaõnnestus",
+            detailid: error.message
+        })    
+    }
 }
 
 async function looMatk(req, res) {
@@ -28,7 +35,6 @@ async function looMatk(req, res) {
         res.status(403).end({error: "nimetus ei tohi olla tühi"})
         return;
     }
-
 
     const matk = {
         nimetus: req.body.nimetus,
