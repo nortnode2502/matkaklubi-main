@@ -44,17 +44,24 @@ async function looMatk(req, res) {
 async function lisaOsalejaCtrl(req, res) {
     if (!req.body.email) {
         res.status(403).end({error: "email ei tohi olla tühi"})
+        return
     }
 
     if (!req.params.id) {
         res.status(403).end({error: "matka id ei ole antud"})
+        return
     }
 
-    const result = await lisaOsaleja(req.params.id, req.body.email)
-    if (result) {
-        res.status(201).end()
-    } else {
+    try {
+        const result = await lisaOsaleja(req.params.id, req.body.email)
+        if (result) {
+            res.status(201).end()
+        } else {
+            res.status(401).end({error: "osaleja lisamine ebaõnnestus"})
+        }
+    } catch (error) {
         res.status(401).end({error: "osaleja lisamine ebaõnnestus"})
+        return
     }
 }
 
